@@ -133,8 +133,6 @@ function addUsers(data){
         })
         button.addEventListener('click', function () {
             window.open('/client/teamlist/team.html', '_self');
-            
-
         });
         
         userrow.appendChild(button);

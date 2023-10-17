@@ -33,21 +33,16 @@
 // ];
 
 // hackathon(data);
-fetch('http://localhost:5000/hackathon/allhack')
+fetch('https://kontests.net/api/v1/all')
     .then((response) => response.json())
     .then((data) => {
-        // Handle the JSON data here
-        // console.log('hello')
-        // console.log(data);
         hackathon(data)
-        // You can now display or manipulate the data in your HTML
     })
     .catch((error) => {
         console.error('Error:', error);
     });
 
 // addUsers(data);
-
 function hackathon(data) {
     const container = document.querySelector('.container');
 
@@ -64,7 +59,7 @@ function hackathon(data) {
         container.lastChild.appendChild(block);
 
         const header = document.createElement('header');
-        header.innerText = hackathonData.Hackathon;
+        header.innerText = hackathonData.name;
         block.appendChild(header);
 
         const infoDiv = document.createElement('div');
@@ -72,11 +67,13 @@ function hackathon(data) {
         block.appendChild(infoDiv);
 
         const infoParagraphs = [
-            // `Venue : ${hackathonData.Venue}`,
             `Name : ${hackathonData.name}`,
-            `Deadline : ${hackathonData.Deadline}`,
-            `Max Team Members : ${hackathonData.pcount}`,
-            `Description : ${hackathonData.Description}`
+            `URL : <a href= "${hackathonData.url}" style="color:white;">Visit on Website</a>`,
+            `Start-Time : ${hackathonData.start_time}`,
+            `End-Time : ${hackathonData.end_time}`,
+            `Duration : ${Math.round(hackathonData.duration / 3600)} hours`,
+            `Website : ${hackathonData.site}`,
+            `Status : ${hackathonData.status}`,
         ];
 
         infoParagraphs.forEach(info => {
@@ -95,14 +92,12 @@ function hackathon(data) {
         createTeamButton.innerText = 'Create Team';
         buttonDiv.appendChild(createTeamButton);
         createTeamButton.addEventListener('click', function () {
-            
+
             const filePath = ('/client/createTeam.html');
             window.open(filePath, '_self');
         });
 
         const registerButton = document.createElement('button');
-
-    
 
         registerButton.classList.add('btn');
         registerButton.style.float = 'right';
@@ -110,7 +105,6 @@ function hackathon(data) {
         buttonDiv.appendChild(registerButton);
         registerButton.addEventListener('click', function () {
             window.open('/client/Profile&Registration_Page/getprofile.html', '_self');
-            
 
         });
     });
